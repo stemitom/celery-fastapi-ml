@@ -24,9 +24,7 @@ def train(X_train, y_train, params:dict = {"n_estimators": 500, "max_depth": 4, 
     regressor.fit(X_train, y_train)
     return regressor
 
-def metric_test():
-    model = train()
-    _, X_test, _, y_test = dataLoader()
+def metric_test(X_test, y_test, model):
     mse = mean_squared_error(y_test, model.predict(X_test))
     return mse
 
@@ -34,4 +32,8 @@ def main():
     X_train, X_test, y_train, y_test = dataLoader()
     celery_log.info("Dataset loaded")
     celery_log.info("Starting Training")
-
+    model = train(X_train, y_train)
+    celery_log.info("Ending Training")
+    mse = metric_test(X_test, y_test, model)
+    celery_log.info(f"MSELoss: {mse}")
+    
