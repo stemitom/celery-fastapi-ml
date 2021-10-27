@@ -1,6 +1,5 @@
 import pandas
 import numpy
-from scipy.sparse.construct import random
 from sklearn import datasets, ensemble
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
@@ -19,7 +18,6 @@ def dataLoader(partition_size:str = 0.2, random_state:int = 42):
 def train(X_train, y_train, params:dict = {"n_estimators": 500, "max_depth": 4, "min_samples_split": 5, 
 "learning_rate": 0.01, "loss": "squared_error",
 }):
-    # X_train, _, y_train, _ = dataLoader()
     regressor = ensemble.GradientBoostingRegressor(**params)
     regressor.fit(X_train, y_train)
     return regressor
@@ -36,4 +34,3 @@ def main():
     celery_log.info("Ending Training")
     mse = metric_test(X_test, y_test, model)
     celery_log.info(f"MSELoss: {mse}")
-    
