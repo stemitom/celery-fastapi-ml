@@ -15,8 +15,12 @@ def dataLoader(partition_size:str = 0.2, random_state:int = 42):
     )
     return X_train, X_test, y_train, y_test
 
-def train(X_train, y_train, params:dict = {"n_estimators": 500, "max_depth": 4, "min_samples_split": 5, 
-"learning_rate": 0.01, "loss": "squared_error",
+def train(X_train, y_train, params:dict = {
+    "n_estimators": 500, 
+    "max_depth": 4, 
+    "min_samples_split": 5, 
+    "learning_rate": 0.01, 
+    "loss": "squared_error",
 }):
     regressor = ensemble.GradientBoostingRegressor(**params)
     regressor.fit(X_train, y_train)
