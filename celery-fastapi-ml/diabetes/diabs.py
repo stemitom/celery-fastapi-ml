@@ -7,7 +7,7 @@ from celery.utils.log import get_logger
 
 celery_log = get_logger(__name__)
 
-def dataLoader(partition_size:str = 0.2, random_state:int = 42):
+def dataloader(partition_size:str = 0.2, random_state:int = 42):
     diabetes = datasets.load_diabetes()
     X, y = diabetes.data, diabetes.target
     X_train, X_test, y_train, y_test = train_test_split(
@@ -31,7 +31,7 @@ def metric_test(X_test, y_test, model):
     return mse
 
 def main():
-    X_train, X_test, y_train, y_test = dataLoader()
+    X_train, X_test, y_train, y_test = dataloader()
     celery_log.info("Dataset loaded")
     celery_log.info("Starting Training")
     model = train(X_train, y_train)
